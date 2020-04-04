@@ -9,7 +9,7 @@ var times
 let polySynth;
 
 function setup() {
-	createCanvas(600,900);
+	createCanvas(600,1100);
 	setInterval(time_Running, 100);
 	polySynth = new p5.PolySynth();
 	userStartAudio();	
@@ -35,7 +35,7 @@ function draw() {
 	}
 
 	// textAlign(LEFT)
-	textSize(30);
+	textSize(35);
 	text("Runs complete: " + counter, width/2, 250);
 	
 	for(var i = 0; i < 10; i++){
@@ -43,13 +43,13 @@ function draw() {
 		if (i < counter){
 			timeVal = runTimes[i];
 		}
-		text("Run " + (i+1) + " time: " + timeVal, width/2, 300+(i*40));
+		text("Run " + (i+1) + " time: " + timeVal, width/2, 350+(i*50));
 	}
 
-	textSize(40);
+	textSize(60);
 	var totalTime = runTimes.reduce((a, b) => a + b, 0);
-	text("Average Time: " + (totalTime/runTimes.length).toFixed(1), width/2, 725);
-	text("Total Time: " + totalTime.toFixed(1), width/2, 800);
+	text("Average Time: " + (totalTime/runTimes.length).toFixed(1), width/2, 900);
+	text("Total Time: " + totalTime.toFixed(1), width/2, 1000);
 
 
 	if(restingTimer <= 0){
@@ -74,7 +74,7 @@ function startRun(){
 		polySynth.play('E4', 1, 0, 0.2);
 		polySynth.play('G7', 1, 0.2, 0.2);
 		resting = false;
-		restingTimer = 1;
+		restingTimer = 40;
 	}
 }
 
