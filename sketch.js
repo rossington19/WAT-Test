@@ -1,8 +1,9 @@
 var runningTimer = 0;
 var restingTimer = 5;
-var counter = -1;
+var counter = 0;
 var resting = false;
 var runTimes = [];
+var started = false;
 
 var times
 
@@ -20,7 +21,7 @@ function draw() {
 	textAlign(CENTER, CENTER)
 	textSize(150);
 
-	if (counter >= 10 || counter === -1){
+	if (counter >= 10 || !started){
 		background(20, 143, 219);
 		textSize(100);
 		text("WAT TEST", width/2, 150);
@@ -46,10 +47,13 @@ function draw() {
 		text("Run " + (i+1) + " time: " + timeVal, width/2, 350+(i*50));
 	}
 
-	textSize(60);
+	textSize(50);
 	var totalTime = runTimes.reduce((a, b) => a + b, 0);
 	text("Average Time: " + (totalTime/runTimes.length).toFixed(1), width/2, 900);
+	textSize(60);
+	textStyle(BOLD);
 	text("Total Time: " + totalTime.toFixed(1), width/2, 1000);
+	textStyle(NORMAL);
 
 
 	if(restingTimer <= 0){
@@ -88,8 +92,14 @@ function endRun(){
 }
 
 function mouseClicked() {
-	if(!resting && counter < 10 ){
+	if(!resting && counter < 10 && started){
+		started = true;
 		runTimes.push(runningTimer);
+		endRun();
+	}
+	if (!started){
+		started = true;
+		counter = -1;
 		endRun();
 	}
 }
